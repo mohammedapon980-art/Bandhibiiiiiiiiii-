@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Pacifico', cursive;
+    overflow: hidden;
+    height: 100vh;
+    background: #ffecd2;
+  }
+
+  /* Page 1 */
+  #page1 {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+  }
+
+  #page1 h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  }
+
+  #nameInput {
+    padding: 15px;
+    font-size: 1.3em;
+    border-radius: 15px;
+    border: 2px solid #fff;
+    text-align: center;
+    outline: none;
+    background: #fff;
+    color: #333;
+    width: 250px;
+    font-weight: bold;
+  }
+
+  #submitBtn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #ff6b6b;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  }
+
+  #submitBtn:hover {
+    background-color: #ff4757;
+  }
+
+  #note {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #fff;
+    opacity: 0.9;
+  }
+
+  /* Page 2 */
+  #page2 {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background: linear-gradient(to top, #a18cd1, #fbc2eb);
+    color: #fff;
+  }
+
+  /* Balloons */
+  .balloon {
+    position: absolute;
+    bottom: -100px;
+    width: 50px;
+    height: 70px;
+    border-radius: 50%;
+    animation: rise 6s linear infinite;
+  }
+
+  @keyframes rise {
+    0% { transform: translateY(0) translateX(0) rotate(0deg);}
+    100% { transform: translateY(-110vh) translateX(50px) rotate(360deg);}
+  }
+
+  .balloon:nth-child(1) { left: 10%; background: #ff6b6b; animation-duration: 6s; }
+  .balloon:nth-child(2) { left: 30%; background: #feca57; animation-duration: 7s; }
+  .balloon:nth-child(3) { left: 50%; background: #48dbfb; animation-duration: 8s; }
+  .balloon:nth-child(4) { left: 70%; background: #1dd1a1; animation-duration: 7.5s; }
+  .balloon:nth-child(5) { left: 90%; background: #5f27cd; animation-duration: 6.5s; }
+
+  /* Fireworks / Confetti */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    top: -10px;
+    opacity: 0.8;
+    animation: fall 3s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg);}
+    100% { transform: translateY(100vh) rotate(360deg);}
+  }
+
+  /* Message box */
+  #messageBox {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6em;
+    line-height: 1.5em;
+    white-space: pre-line;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    animation: bounce 1s infinite alternate;
+  }
+
+  @keyframes bounce {
+    0% { transform: translateX(-50%) translateY(0);}
+    100% { transform: translateX(-50%) translateY(-15px);}
+  }
+
+  #createdBy {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    opacity: 0.8;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Page 1 -->
+  <div id="page1">
+    <h1>তোমার নাম লিখো</h1>
+    <input type="text" id="nameInput" value="Tushi">
+    <button id="submitBtn">Submit</button>
+    <div id="note">(যার জন্য তৈরি সে ছাড়া অন্য কারো নাম লিখলে কাজ হবে না)</div>
+  </div>
+
+  <!-- Page 2 -->
+  <div id="page2">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <div id="messageBox">
+╔❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀╗
+║  🌸•••♡ ʜᴀᴘᴘʏ ʙɪʀᴛʜᴅᴀʏ ᴛᴜsʜɪ  ♡•••🌸  ║
+╚❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀❁❀╝
+    </div>
+
+    <div id="createdBy">created by APON</div>
+  </div>
+
+  <script>
+    const submitBtn = document.getElementById('submitBtn');
+    const nameInput = document.getElementById('nameInput');
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+
+    submitBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim().toLowerCase();
+      if(name === 'tushi'){
+        page1.style.display = 'none';
+        page2.style.display = 'block';
+
+        // Add confetti/fireworks
+        for(let i=0;i<200;i++){
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          confetti.style.left = Math.random()*window.innerWidth + 'px';
+          confetti.style.backgroundColor = `hsl(${Math.random()*360}, 100%, 70%)`;
+          confetti.style.animationDuration = 2 + Math.random()*3 + 's';
+          confetti.style.width = 5 + Math.random()*10 + 'px';
+          confetti.style.height = confetti.style.width;
+          document.body.appendChild(confetti);
+        }
+
+      } else {
+        alert('দুঃখিত, নাম ভুল। শুধুমাত্র Tushi-এর জন্য তৈরি।');
+      }
+    });
+
+    nameInput.addEventListener('keypress', function(e){
+      if(e.key === 'Enter'){
+        submitBtn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>
